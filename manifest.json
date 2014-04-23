@@ -1,0 +1,13 @@
+{
+  "id": "com.hivewallet.makerequest-test",
+  "name": "MakeRequest tester",
+  "description": "Test runner for makeRequest tests",
+  "author": "Jan Vornberger",
+  "contact": "jan@hivewallet.com",
+  "repoURL": "",
+  "accessedHosts": [
+    "http://hiveapp-makerequest-server.herokuapp.com"
+  ],
+  "version": "0.0.1",
+  "icon": "icon.png"
+}
