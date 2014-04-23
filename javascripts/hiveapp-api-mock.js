@@ -3,7 +3,7 @@
  *
  * Licensed under the MIT License.
  *
- * v1.0.1
+ * v1.1.0
  */
 
 var bitcoin = bitcoin || mockBitcoin()
@@ -163,6 +163,18 @@ function mockBitcoin() {
       ajax(url, args)
     },
 
+    installApp: function(url, callback){
+      async(function(){
+        callback(null, true)
+      })
+    },
+
+    getApplication: function(appId, callback){
+      async(function(){
+        callback({id: appId, version: '1.0.0'})
+      })
+    },
+
     userStringForSatoshi: function(satoshiAmount) {
       var amount = satoshiAmount / bitcoinFormatToSatoshi[preferredBitcoinFormat]
       return amount.toLocaleString()
@@ -185,5 +197,4 @@ function mockBitcoin() {
     }
   };
 }
-
 
