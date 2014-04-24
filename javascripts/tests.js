@@ -7,7 +7,7 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql("Successful");
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test1', requestParams);
@@ -21,7 +21,7 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql({'result': 'Successful'});
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test2', requestParams);
@@ -36,7 +36,7 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql({'result': 'Successful'});
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test3', requestParams);
@@ -49,7 +49,7 @@ describe('makeRequest', function() {
                 console.log("error ", arguments);
                 expect(status).to.eql(404);
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/notthere', requestParams);
@@ -64,7 +64,7 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql("Successful");
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test4', requestParams);
@@ -79,7 +79,7 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql("Successful");
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test4', requestParams);
@@ -94,7 +94,7 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql("Successful");
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test5', requestParams);
@@ -109,9 +109,37 @@ describe('makeRequest', function() {
                 expect(status).to.eql(200);
                 expect(data).to.eql("Successful");
                 done();
-            },
+            }
         };
 
         bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test5', requestParams);
+    });
+
+    it('should prevent access to hosts not listed in the manifest', function(done) {
+        var requestParams = {
+            type: 'GET',
+            complete: function(data, status) {
+                console.log("complete ", arguments);
+                expect(status).to.eql(403);
+                done();
+            }
+        };
+
+        bitcoin.makeRequest('http://hive-app-registry.herokuapp.com/index.json', requestParams);
+    });
+
+    it('should not give up too quickly', function(done) {
+        this.timeout(15 * 1000);
+        var requestParams = {
+            type: 'GET',
+            success: function(data, status) {
+                console.log("success ", arguments);
+                expect(status).to.eql(200);
+                expect(data).to.eql("Successful");
+                done();
+            }
+        };
+
+        bitcoin.makeRequest('http://hiveapp-makerequest-server.herokuapp.com/test6', requestParams);
     });
 });
